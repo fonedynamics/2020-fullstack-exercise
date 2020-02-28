@@ -42,3 +42,7 @@ The customer table should provide filters on the following:
 As well as the filters, each column should be able to be reordered by clicking on the appropriate heading (ascending/descending)
 
 The customer table must not be viewable unless the user is authenticated.
+
+## Questions?
+
+If you have any questions around the implementation of this exercise, please open an Issue on the master repository.
