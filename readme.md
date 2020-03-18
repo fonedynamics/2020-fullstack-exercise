@@ -45,4 +45,4 @@ The customer table must not be viewable unless the user is authenticated.
 
 ## Questions?
 
-If you have any questions around the implementation of this exercise, please open an Issue on the master repository.
+If you have any questions around the implementation of this exercise, please open an Issue on the parent repository at https://github.com/fonedynamics
