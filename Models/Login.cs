@@ -1,4 +1,4 @@
-﻿namespace _2020_fullstack_exercise.Models
+﻿namespace fonedynamics._2020.fullstack.exercise.Models
 {
     public class Login
     {

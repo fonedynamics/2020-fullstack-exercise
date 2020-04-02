@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
-namespace _2020_fullstack_exercise.Models
+namespace fonedynamics._2020.fullstack.exercise.Models
 {
     public class Customer
     {
