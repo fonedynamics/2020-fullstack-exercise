@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace fonedynamics._2020.fullstack.exercise
 {
@@ -22,6 +25,21 @@ namespace fonedynamics._2020.fullstack.exercise
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions<YamlFileOptions>().Bind(Configuration);
+            services.AddControllers()
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.Converters.Add(new StringEnumConverter()));
+
+            services
+                .AddSwaggerGen(
+                    opt =>
+                    {
+
+                        opt.SwaggerDoc("v1", new OpenApiInfo { Title = "fonedynamics-2020-fullstack-excercise", Version = "v1" });
+
+                        opt.CustomSchemaIds(type => type.FullName);
+                        opt.CustomOperationIds(apiDesc => apiDesc.ActionDescriptor.Id);
+
+                    })
+                .AddSwaggerGenNewtonsoftSupport();
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -59,6 +77,17 @@ namespace fonedynamics._2020.fullstack.exercise
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(
+                opt =>
+                {
+                    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "fonedynamics-2020-fullstack-excercise");
+                    opt.DocExpansion(DocExpansion.List);
+                    opt.DefaultModelExpandDepth(3);
+                    opt.DefaultModelsExpandDepth(0);
+                });
 
             app.UseSpa(spa =>
             {
