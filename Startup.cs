@@ -1,4 +1,5 @@
 using _2020_fullstack_exercise.Options;
+using _2020_fullstack_exercise.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,8 @@ namespace fonedynamics._2020.fullstack.exercise
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions<YamlFileOptions>().Bind(Configuration);
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<ICustomerService, CustomerService>();
             services.AddControllers()
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.Converters.Add(new StringEnumConverter()));
 
