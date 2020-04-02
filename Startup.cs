@@ -1,5 +1,7 @@
-using _2020_fullstack_exercise.Options;
-using _2020_fullstack_exercise.Services;
+#region Using
+
+using fonedynamics._2020.fullstack.exercise.Options;
+using fonedynamics._2020.fullstack.exercise.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.SwaggerUI;
+
+
+#endregion
 
 namespace fonedynamics._2020.fullstack.exercise
 {
