@@ -1,0 +1,23 @@
+<h1 id="tableLabel">Customers</h1>
+
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="customers">
+  <thead>
+    <tr>
+      <th (click)="sortCustomers('id')">Id</th>
+      <th (click)="sortCustomers('name')">Name</th>
+      <th (click)="sortCustomers('numEmployees')">No. Of Employees</th>
+      <th (click)="sortCustomers('tags')">Tags</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.numEmployees }}</td>
+      <td>{{ customer.tags }}</td>
+    </tr>
+  </tbody>
+</table>
