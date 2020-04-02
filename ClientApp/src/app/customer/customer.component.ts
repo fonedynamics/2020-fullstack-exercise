@@ -3,28 +3,81 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-customer',
-  templateUrl: './customer.component.html'
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
 export class CustomerComponent {
   public customers: Customer[];
+  filteredCustomers: Customer[];
   sortByForCustomers?: string;
+  tags?: string[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<Customer[]>(baseUrl + 'api/Customer').subscribe(result => {
-      console.log('result', result);
       this.customers = result;
-      console.log('this.customers', this.customers);
+      this.filteredCustomers = this.customers;
+      const tags: string[] = [];
+      this.tags = [];
+      if (this.customers) {
+        for (const customer of this.customers) {
+          for (const tag of customer.tags) {
+            tags.push(tag);
+          }
+        }
+      }
+      this.tags = tags.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], []);
     }, error => console.error(error));
   }
 
   //TODO: Filters
+
+  filterOnTags(tag?: string) {
+    this.filteredCustomers = [];
+    if (!tag || tag === "") {
+      this.filteredCustomers = this.customers;
+    };
+
+    for (const customer of this.customers) {
+      if (customer.tags.includes(tag)) {
+        this.filteredCustomers.push(customer);
+      }
+    }
+
+    return this.filteredCustomers;
+  }
+
+  filterOnNumEmployees(numEmployees?: string) {
+    this.filteredCustomers = [];
+    if (!numEmployees || numEmployees === "") {
+      this.filteredCustomers = this.customers;
+    };
+    const customersWith1To10Employees: Customer[] = [];
+    const customersWith11To50Employees: Customer[] = [];
+    const customersWithMoreThan50Employees: Customer[] = [];
+
+    for (const customer of this.customers) {
+      if (customer.numEmployees >= 1 && customer.numEmployees <= 10) {
+        customersWith1To10Employees.push(customer);
+        } else if (customer.numEmployees >= 11 && customer.numEmployees <= 50) {
+        customersWith11To50Employees.push(customer);
+        } else {
+        customersWithMoreThan50Employees.push(customer);
+        }
+    }
+    this.filteredCustomers = parseInt(numEmployees) === 1
+      ? customersWith1To10Employees
+      : parseInt(numEmployees) === 11
+      ? customersWith11To50Employees
+      : customersWithMoreThan50Employees;
+    return this.filteredCustomers;
+  }
 
   // sorts the customers
   sortCustomers(sortBy: string) {
 
     if (this.sortByForCustomers && this.sortByForCustomers === sortBy) {
       if (sortBy === "id") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.id && n2.id) && (n1.id > n2.id)) {
             return -1;
           }
@@ -34,7 +87,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "name") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.name && n2.name) && (n1.name > n2.name)) {
             return -1;
           }
@@ -44,7 +97,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "numEmployees") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.numEmployees && n2.numEmployees) && (n1.numEmployees > n2.numEmployees)) {
             return -1;
           }
@@ -54,7 +107,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "tags") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.tags && n2.tags) && (n1.tags > n2.tags)) {
             return -1;
           }
@@ -67,7 +120,7 @@ export class CustomerComponent {
       this.sortByForCustomers = "";
     } else {
       if (sortBy === "id") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.id && n2.id) && (n1.id > n2.id)) {
             return 1;
           }
@@ -77,7 +130,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "name") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.name && n2.name) && (n1.name > n2.name)) {
             return 1;
           }
@@ -87,7 +140,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "numEmployees") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.numEmployees && n2.numEmployees) && (n1.numEmployees > n2.numEmployees)) {
             return 1;
           }
@@ -97,7 +150,7 @@ export class CustomerComponent {
           return 0;
         });
       } else if (sortBy === "tags") {
-        this.customers.sort((n1, n2) => {
+        this.filteredCustomers.sort((n1, n2) => {
           if ((n1.tags && n2.tags) && (n1.tags > n2.tags)) {
             return 1;
           }

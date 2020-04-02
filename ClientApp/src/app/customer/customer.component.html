@@ -1,20 +1,46 @@
 <h1 id="tableLabel">Customers</h1>
 
 
-<p *ngIf="!customers"><em>Loading...</em></p>
+<p *ngIf="!filteredCustomers"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="customers">
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+    <label for="filterNumEmployees" class="col-sm-6 control-label">No of Employees</label>
+    <div class="col-sm-6">
+      <select class="form-control" (change)="filterOnNumEmployees($event.target.value)" #filterNumEmployees id="filterNumEmployees">
+        <option value=""></option>
+        <option value="1">1-10 employees</option>
+        <option value="11">11-50 employees</option>
+        <option value="50">50+ employees</option>
+      </select>
+    </div>
+  </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group" *ngIf="tags">
+      <label for="filterTag" class="col-sm-6 control-label">Tags</label>
+      <div class="col-sm-6">
+        <select class="form-control" (change)="filterOnTags($event.target.value)" #filterTag id="filterTag">
+          <option value=""></option>
+          <option *ngFor="let tag of tags">{{tag}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="filteredCustomers">
   <thead>
     <tr>
-      <th (click)="sortCustomers('id')">Id</th>
+      <!--<th (click)="sortCustomers('id')">Id</th>-->
       <th (click)="sortCustomers('name')">Name</th>
       <th (click)="sortCustomers('numEmployees')">No. Of Employees</th>
       <th (click)="sortCustomers('tags')">Tags</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of customers">
-      <td>{{ customer.id }}</td>
+    <tr *ngFor="let customer of filteredCustomers">
+      <!--<td>{{ customer.id }}</td>-->
       <td>{{ customer.name }}</td>
       <td>{{ customer.numEmployees }}</td>
       <td>{{ customer.tags }}</td>
