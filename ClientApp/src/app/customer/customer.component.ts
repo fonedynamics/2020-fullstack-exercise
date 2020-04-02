@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from "../services/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-customer',
@@ -12,7 +14,10 @@ export class CustomerComponent {
   sortByForCustomers?: string;
   tags?: string[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, private authService: AuthService, router: Router) {
+    if (!authService.isLoggedIn()) {
+      router.navigate(["/login"]);
+    }
     http.get<Customer[]>(baseUrl + 'api/Customer').subscribe(result => {
       this.customers = result;
       this.filteredCustomers = this.customers;
@@ -28,8 +33,6 @@ export class CustomerComponent {
       this.tags = tags.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], []);
     }, error => console.error(error));
   }
-
-  //TODO: Filters
 
   filterOnTags(tag?: string) {
     this.filteredCustomers = [];
