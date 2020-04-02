@@ -1,4 +1,4 @@
-﻿using _2020_fullstack_exercise.Models;
+﻿using fonedynamics._2020.fullstack.exercise.Models;
 
 namespace fonedynamics._2020.fullstack.exercise.Services
 {
