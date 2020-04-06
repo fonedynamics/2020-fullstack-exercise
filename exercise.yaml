@@ -56,3 +56,37 @@ customers:
       - commercial
       - clothing
       - shirts
+  - id: 397feee7-fc37-4e88-87e1-0378019dfc70
+    name: Bernies Furniture
+    num_employees: 3
+    tags:
+      - commercial
+      - furniture
+      - hardware
+  - id: b13bc3f3-95e8-4c79-81fc-8d32c5bea9e9
+    name: Hardware R Us
+    num_employees: 10
+    tags:
+      - commercial
+      - hardware
+      - tools
+  - id: 97ab21b3-9192-4bd5-af3e-f03ed6a329d9
+    name: Mixy's Power Tools
+    num_employees: 4
+    tags:
+      - commercial
+      - hardware
+      - tools
+  - id: 4e9f7c0f-3473-4307-b27d-08f3af08d15d
+    name: Fred's Clothing
+    num_employees: 1
+    tags:
+      - commercial
+      - clothing
+      - shirts
+  - id: 95684d39-37c2-41ef-ba00-dc974d9f49a0
+    name: Jims Gyms
+    num_employees: 7
+    tags:
+      - commercial
+      - sports

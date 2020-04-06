@@ -23,23 +23,26 @@ You have been tasked to build a HTTP RESTful API using C# .Net Core, with an Ang
 
 #### Backend
 
-All data is to be sourced from `exercize.yaml` - no need to set up a real database.
+All data is to be sourced from `exercise.yaml` - no need to set up a real database.
 
 Develop an API in C# .Net Core with 2 endpoints:
-1. Authorizes usernames and passwords - `auth` key in `exercize.yaml`
-2. Shows customer data - `customers` key in `exercize.yaml`
+1. Authorizes usernames and passwords - `auth` key in `exercise.yaml`, and returns a JWT to authenticate against the customer endpoint
+2. Shows customer data - `customers` key in `exercise.yaml`
 
 #### Frontend
 
-Develop an AngularJS application which has two parts:
+Develop an Angular application which has two parts:
 1. A login screen which authorizes via the authorization endpoint in the backend
-2. Once authenticated, shows a table of customers with the data retrieved from the backend's customer endpoint
+2. Once authenticated, shows a table of customers with the data retrieved from the backend's customer endpoint.
 
-The customer table should provide filters on the following:
-- tags
-- number of employees - 1-10 employees, 11-50 employees, 50+ employees
+The customer table has the following requirements:
+- UI layout must be based on `ui.png`
+- it must implement paging
+- it must provide filters on the following:
+  - tags
+  - number of employees - 1-10 employees, 11-50 employees, 50+ employees
 
-As well as the filters, each column should be able to be reordered by clicking on the appropriate heading (ascending/descending)
+As well as the filters, each column must be able to be reordered by clicking on the appropriate heading (ascending/descending)
 
 The customer table must not be viewable unless the user is authenticated.
 
