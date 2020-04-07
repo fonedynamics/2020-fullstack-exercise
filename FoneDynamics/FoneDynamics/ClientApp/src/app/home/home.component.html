@@ -1,0 +1,64 @@
+<app-nav-menu></app-nav-menu>
+<div class="row">
+  <div class="col-12">
+    <h3>Customers</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-2">
+
+
+
+    
+
+
+
+
+    <input type="text" class="form-control" placeholder="filter by tag name" (keyup)="textChange($event)" [value]="searchkey" />
+  </div>
+  <div (change)="filterChange($event)" class="col-2">
+    <select style="height:100%; width:100%;">
+      <option value="0">All</option>
+      <option *ngFor="let f of numberOfEmployeeFilters" value="{{f}}">{{f}}</option>
+    </select>
+
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <br />
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Number of Employees</th>
+          <th>Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{customer.name}}</td>
+          <td>{{customer.numberOfEmployees}}</td>
+          <td>{{customer.tags}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li  class="page-item">
+          <a class="page-link" (click)="goToPage(0)" href="#">First</a>
+        </li>
+        <li *ngFor="let item of [].constructor(numberOfPages); let i = index" [class.active]="i == pageIndex" class="page-item">
+          <a class="page-link" (click)="goToPage(i)" href="#">{{i + 1}}</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" (click)="goToPage(numberOfPages -1)" href="#">Last</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
