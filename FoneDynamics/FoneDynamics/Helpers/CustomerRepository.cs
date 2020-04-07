@@ -53,17 +53,34 @@ namespace FoneDynamics.Helpers
             return cust;
         }
 
-        public static List<Customer> GetCustomers(int numOfEmployee, string searchKey, int skip, int take, out int allRecordCount, out List<int> employeeFilters)
+        public static List<Customer> GetCustomers(int numOfEmployee, string searchKey, int skip, int take, string sortCol, bool sortAsc, out int allRecordCount, out List<int> employeeFilters)
         {
             EnsureLoaded();
 
             allRecordCount = _customer.Count();
             employeeFilters = _customer.GroupBy(c => c.NumberOfEmployees).Select(c => c.FirstOrDefault()).Select(c => c.NumberOfEmployees).ToList();
 
-            return _customer.Where(c =>
+            var uncut = _customer.Where(c =>
             (numOfEmployee > 0 ? c.NumberOfEmployees == numOfEmployee : true) &&
-            (c.Name.Contains(searchKey ?? "") ||
-            c.Tags.Any(x => x.Contains(searchKey ?? "")))).Skip(skip).Take(take).ToList();
+           // (c.Name.Contains(searchKey ?? "") ||
+            c.Tags.Any(x => x.Contains(searchKey ?? "")));
+
+            if (sortAsc)
+            {
+                if(sortCol == "name") uncut = uncut.OrderBy(c => c.Name).ToList();
+                if (sortCol == "numOfEmp") uncut = uncut.OrderBy(c => c.NumberOfEmployees).ToList();
+                if (sortCol == "tags") uncut = uncut.OrderBy(c => c.Tags.OrderBy(child=> child).FirstOrDefault()).ToList();
+            }
+            else
+            {
+                if (sortCol == "name") uncut = uncut.OrderByDescending(c => c.Name).ToList();
+                if (sortCol == "numOfEmp") uncut = uncut.OrderByDescending(c => c.NumberOfEmployees).ToList();
+                if (sortCol == "tags") uncut = uncut.OrderByDescending(c => c.Tags.OrderBy(child => child).FirstOrDefault()).ToList();
+            }
+            
+            var res = uncut.Skip(skip).Take(take).ToList();
+
+            return res;
 
         }
     }

@@ -30,9 +30,15 @@
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Number of Employees</th>
-          <th>Tags</th>
+          <th>
+            <a href="#"(click)="sort('name')">Name</a>
+          </th>
+          <th>
+            <a href="#" (click)="sort('numOfEmp')">Number of Employees</a>
+          </th>
+          <th>
+            <a href="#" (click)="sort('tags')">Tags</a>
+          </th>
         </tr>
       </thead>
       <tbody>

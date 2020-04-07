@@ -19,6 +19,8 @@ export class HomeComponent {
     public pageIndex: number = 0;
     public numberOfPages: number = 0;
 
+  public sortCol: string = "";
+  public sortAsc: boolean = true;
 
     timer: any;
 
@@ -35,7 +37,7 @@ export class HomeComponent {
 
     search(thisRef): void {
         thisRef.customers = [];
-        thisRef.svc.fetch(this.selectedNumberOfEmployeeFilter, thisRef.searchkey, this.pageIndex * this.itemsToDisplay, this.itemsToDisplay).subscribe(c => {
+        thisRef.svc.fetch(this.sortCol, this.sortAsc, this.selectedNumberOfEmployeeFilter, thisRef.searchkey, this.pageIndex * this.itemsToDisplay, this.itemsToDisplay).subscribe(c => {
             thisRef.customers = c.results;
             thisRef.numberOfEmployeeFilters = c.numberOfEmployeeFilters;
             thisRef.totalItems = c.totalItems;
@@ -54,4 +56,13 @@ export class HomeComponent {
         this.pageIndex = page;
         this.search(this);
     }
+  sort(colName): void {
+    debugger;
+    if (this.sortCol == colName) {
+      this.sortAsc = !this.sortAsc;
+    }
+    this.sortCol = colName;
+
+    this.search(this);
+  }
 }

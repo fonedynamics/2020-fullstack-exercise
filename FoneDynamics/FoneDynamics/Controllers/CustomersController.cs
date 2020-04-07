@@ -16,11 +16,11 @@ namespace FoneDynamics.Controllers
     {
         // GET: api/Customers
         [HttpGet]
-        public IActionResult Get(int numOfEmployee, string searchKey, int skip, int take)
+        public IActionResult Get( int numOfEmployee, string searchKey, int skip, int take, string sortCol ="name", bool sortAsc = true)
         {
             int allRecordCount = 0;
             List<int> numberOfEmployeeFilters = new List<int>();
-            var cust = CustomerRepository.GetCustomers(numOfEmployee, searchKey, skip, take, out allRecordCount, out numberOfEmployeeFilters);
+            var cust = CustomerRepository.GetCustomers(numOfEmployee, searchKey, skip, take, sortCol, sortAsc, out allRecordCount, out numberOfEmployeeFilters);
             return Ok(new {
             results = cust,
             totalItems = allRecordCount,

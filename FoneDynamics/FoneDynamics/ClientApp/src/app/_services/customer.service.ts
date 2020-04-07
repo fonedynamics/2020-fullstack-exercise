@@ -19,9 +19,9 @@ export class CustomerService {
     }
 
 
-    public fetch(numOfEmployee: number, searchKey: string, skip: number, take: number) {
+    public fetch(sortCol: string, sortAsc:boolean, numOfEmployee: number, searchKey: string, skip: number, take: number) {
 
-        return this.http.get<Customer[]>(`${environment.apiUrl}/customers?numOfEmployee=${numOfEmployee}&searchKey=${searchKey}&skip=${skip}&take=${take}`).pipe(map(response => {
+        return this.http.get<Customer[]>(`${environment.apiUrl}/customers?sortCol=${sortCol}&sortAsc=${sortAsc}&numOfEmployee=${numOfEmployee}&searchKey=${searchKey}&skip=${skip}&take=${take}`).pipe(map(response => {
             return response;
         }));
 
