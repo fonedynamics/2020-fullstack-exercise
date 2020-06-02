@@ -1,15 +1,15 @@
-# Fone Dynamics Full Stack Development Coding Challenge
+# Uniti Full Stack Development Coding Challenge
 
 ## Introduction
 
-Thank you for your interest in working with us at Fone Dynamics!
+Thank you for your interest in working with us at Uniti!
 We all love working with talented co-workers. This challenge is intended to help us evaluate where you are in your programming career so we can determine how you might fit within our company.
 
 ## The Challenge
 
 ### Background
 
-In order to assess your ability to develop backend and frontend applications, we ask that you develop a RESTful API in C# .Net Core, with an accompanying Angular Frontend.
+In order to assess your ability to develop backend and frontend applications, we ask that you develop a RESTful API in C# .Net Core, with an accompanying Vue or React Frontend.
 
 ### Setup
 
@@ -48,4 +48,4 @@ The customer table must not be viewable unless the user is authenticated.
 
 ## Questions?
 
-If you have any questions around the implementation of this exercise, please open an Issue on the parent repository at https://github.com/fonedynamics
+If you have any questions around the implementation of this exercise, please open an Issue on the parent repository at https://github.com/uniti-wireless
