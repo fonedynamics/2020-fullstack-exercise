@@ -25,15 +25,15 @@ You have been tasked to build a HTTP RESTful API using C# .Net Core, with an Ang
 
 All data is to be sourced from `exercise.yaml` - no need to set up a real database.
 
-Develop an API in C# .Net Core with 2 endpoints:
+Develop a RESTful API in C# .Net Core with two endpoints which return JSON:
 1. Authorizes usernames and passwords - `auth` key in `exercise.yaml`, and returns a JWT to authenticate against the customer endpoint
-2. Shows customer data - `customers` key in `exercise.yaml`
+2. Returns customer data - `customers` key in `exercise.yaml`. This endpoint accepts the JWT received from the auth endpoint and must check the validity of it before returning results
 
 #### Frontend
 
 Develop an Angular application which has two parts:
 1. A login screen which authorizes via the authorization endpoint in the backend
-2. Once authenticated, shows a table of customers with the data retrieved from the backend's customer endpoint.
+2. Once authenticated, routes the user to the customer page. The customer page retrieves and displays to the user a table of customer data retrieved from the backend's customer endpoint
 
 The customer table has the following requirements:
 - UI layout must be based on `ui.png`
