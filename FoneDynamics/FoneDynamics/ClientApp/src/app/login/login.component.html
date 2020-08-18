@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-6">
+
+  </div>
+  <div class="col-6">
+
+    <form #f="ngForm" class="border border-light p-5" (ngSubmit)="onSubmit()">
+
+      <div *ngIf="hasError" class="alert alert-warning">Invalid username / password</div>
+
+      <p class="h4 mb-4 text-center">Sign in</p>
+
+      <input name="username" type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username" [(ngModel)]="username">
+
+      <input name="password" type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="password">
+
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+          </div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+    </form>
+
+
+  </div>
+</div>
